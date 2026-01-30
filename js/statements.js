@@ -31,35 +31,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function mapAcc(a) {
     const x = norm(a).toLowerCase();
-    if (x === "bank") return "Cash";
     if (x.includes("sales return")) return "Sales Return";
     return norm(a);
   }
 
-  function getType(accountName) {
-    const a = norm(accountName);
+  function getType(acc) {
+    const a = norm(acc);
     if (ACCOUNT_TYPES[a]) return ACCOUNT_TYPES[a];
 
     const x = a.toLowerCase();
     if (x.includes("revenue")) return "Revenue";
-    if (x.includes("expense")) return "Expense";
+    if (x.includes("expense") || x.includes("loss")) return "Expense";
     if (x.includes("payable") || x.includes("accrued") || x.includes("liability") || x.includes("loan")) return "Liability";
     if (x.includes("capital") || x.includes("equity")) return "Equity";
-    if (x.includes("receivable") || x.includes("prepaid") || x.includes("bank") || x.includes("cash") || x.includes("equipment")) return "Asset";
+    if (x.includes("receivable") || x.includes("prepaid") || x.includes("cash") || x.includes("equipment")) return "Asset";
     return "Other";
-  }
-
-  function isAdjustingEntry(entry) {
-    const d = (entry.description || "").toLowerCase();
-    const debit = (entry.debit_account || "").toLowerCase();
-    const credit = (entry.credit_account || "").toLowerCase();
-
-    if (d.includes("accru") || d.includes("depreci") || d.includes("recognized") || d.includes("advance")) return true;
-    if (debit.includes("accrued") || credit.includes("accrued")) return true;
-    if (debit.includes("prepaid") || credit.includes("prepaid")) return true;
-    if (debit.includes("depreciation") || credit.includes("depreciation")) return true;
-
-    return false;
   }
 
   const journalRaw = JSON.parse(localStorage.getItem("journal") || "[]");
@@ -86,71 +72,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ledger = {};
   function ensureAccount(acc) {
-    if (!ledger[acc]) ledger[acc] = { type: getType(acc), debits: 0, credits: 0 };
+    const a = norm(acc);
+    if (!a) return;
+    if (!ledger[a]) ledger[a] = { type: getType(a), dr: 0, cr: 0 };
   }
 
   journal.forEach((entry) => {
-    const debitAcc = entry.debit_account;
-    const creditAcc = entry.credit_account;
+    const debitAcc = norm(entry.debit_account);
+    const creditAcc = norm(entry.credit_account);
     const amt = Number(entry.amount);
+
+    if (!debitAcc || !creditAcc || !isFinite(amt) || amt <= 0) return;
 
     ensureAccount(debitAcc);
     ensureAccount(creditAcc);
 
-    ledger[debitAcc].debits += amt;
-    ledger[creditAcc].credits += amt;
+    ledger[debitAcc].dr += amt;
+    ledger[creditAcc].cr += amt;
   });
 
-  function accountBalance(acc) {
+  function balance(acc) {
     const row = ledger[acc];
     if (!row) return 0;
-    const { type, debits, credits } = row;
-
-    if (type === "Asset" || type === "Expense") return debits - credits;
-    if (type === "Liability" || type === "Equity" || type === "Revenue") return credits - debits;
-    if (type === "ContraRevenue") return debits - credits;
-    return debits - credits;
+    const { type, dr, cr } = row;
+    if (type === "Asset" || type === "Expense") return dr - cr;
+    if (type === "ContraRevenue") return dr - cr;
+    return cr - dr;
   }
 
   const revenues = [];
-  const contraRevenues = [];
+  const contra = [];
   const expenses = [];
-
-  Object.keys(ledger).forEach((acc) => {
-    const type = ledger[acc].type;
-    const bal = accountBalance(acc);
-
-    if (type === "Revenue" && bal !== 0) revenues.push({ acc, amount: bal });
-    if (type === "ContraRevenue" && bal !== 0) contraRevenues.push({ acc, amount: bal });
-    if (type === "Expense" && bal !== 0) expenses.push({ acc, amount: bal });
-  });
-
-  const totalRevenue = revenues.reduce((s, r) => s + r.amount, 0);
-  const totalContra = contraRevenues.reduce((s, r) => s + r.amount, 0);
-  const netRevenue = totalRevenue - totalContra;
-
-  const totalExpenses = expenses.reduce((s, e) => s + e.amount, 0);
-  const netIncome = netRevenue - totalExpenses;
-
   const assets = [];
   const liabilities = [];
-  const equityLines = [];
+  const equities = [];
 
   Object.keys(ledger).forEach((acc) => {
     const type = ledger[acc].type;
-    const bal = accountBalance(acc);
+    const bal = balance(acc);
+    if (!bal) return;
 
-    if (type === "Asset" && bal !== 0) assets.push({ acc, amount: bal });
-    if (type === "Liability" && bal !== 0) liabilities.push({ acc, amount: bal });
-    if (type === "Equity" && bal !== 0) equityLines.push({ acc, amount: bal });
+    if (type === "Revenue") revenues.push({ acc, bal });
+    else if (type === "ContraRevenue") contra.push({ acc, bal });
+    else if (type === "Expense") expenses.push({ acc, bal });
+    else if (type === "Asset") assets.push({ acc, bal });
+    else if (type === "Liability") liabilities.push({ acc, bal });
+    else if (type === "Equity") equities.push({ acc, bal });
   });
 
-  const ownerCap = equityLines.reduce((s, x) => s + x.amount, 0);
-  const equityTotal = ownerCap + netIncome;
+  const totalRevenue = revenues.reduce((s, x) => s + x.bal, 0);
+  const totalContra = contra.reduce((s, x) => s + x.bal, 0);
+  const netRevenue = totalRevenue - totalContra;
 
-  const totalAssets = assets.reduce((s, x) => s + x.amount, 0);
-  const totalLiabilities = liabilities.reduce((s, x) => s + x.amount, 0);
-  const totalLiabilitiesEquity = totalLiabilities + equityTotal;
+  const totalExpenses = expenses.reduce((s, x) => s + x.bal, 0);
+  const netIncome = netRevenue - totalExpenses;
+
+  const totalAssets = assets.reduce((s, x) => s + x.bal, 0);
+  const totalLiabilities = liabilities.reduce((s, x) => s + x.bal, 0);
+  const ownerCapital = equities.reduce((s, x) => s + x.bal, 0);
+
+  const totalEquity = ownerCapital + netIncome;
+  const totalLE = totalLiabilities + totalEquity;
 
   const elRevenue = document.getElementById("totalRevenueCard");
   const elExpenses = document.getElementById("totalExpensesCard");
@@ -162,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (elExpenses) elExpenses.innerText = fmt(totalExpenses);
   if (elNet) elNet.innerText = fmt(netIncome);
   if (elAssets) elAssets.innerText = fmt(totalAssets);
-  if (elLE) elLE.innerText = fmt(totalLiabilitiesEquity);
+  if (elLE) elLE.innerText = fmt(totalLE);
 
   function renderIncomeStatement() {
     const incomeTbody = document.querySelector("#incomeStatementTable tbody");
@@ -170,22 +152,22 @@ document.addEventListener("DOMContentLoaded", () => {
     incomeTbody.innerHTML = "";
 
     incomeTbody.innerHTML += `<tr><td><strong>Revenues</strong></td><td></td></tr>`;
-    revenues.slice().sort((a, b) => b.amount - a.amount).forEach((r) => {
-      incomeTbody.innerHTML += `<tr><td>${r.acc}</td><td>${fmt(r.amount)}</td></tr>`;
+    revenues.slice().sort((a, b) => b.bal - a.bal).forEach((r) => {
+      incomeTbody.innerHTML += `<tr><td>${r.acc}</td><td>${fmt(r.bal)}</td></tr>`;
     });
     incomeTbody.innerHTML += `<tr><td><strong>Total Revenue</strong></td><td><strong>${fmt(totalRevenue)}</strong></td></tr>`;
 
-    if (contraRevenues.length) {
+    if (contra.length) {
       incomeTbody.innerHTML += `<tr><td style="padding-top:10px;"><strong>Less: Returns</strong></td><td></td></tr>`;
-      contraRevenues.slice().sort((a, b) => b.amount - a.amount).forEach((r) => {
-        incomeTbody.innerHTML += `<tr><td>${r.acc}</td><td>(${fmt(r.amount)})</td></tr>`;
+      contra.slice().sort((a, b) => b.bal - a.bal).forEach((r) => {
+        incomeTbody.innerHTML += `<tr><td>${r.acc}</td><td>(${fmt(r.bal)})</td></tr>`;
       });
       incomeTbody.innerHTML += `<tr><td><strong>Net Revenue</strong></td><td><strong>${fmt(netRevenue)}</strong></td></tr>`;
     }
 
     incomeTbody.innerHTML += `<tr><td style="padding-top:10px;"><strong>Expenses</strong></td><td></td></tr>`;
-    expenses.slice().sort((a, b) => b.amount - a.amount).forEach((e) => {
-      incomeTbody.innerHTML += `<tr><td>${e.acc}</td><td>${fmt(e.amount)}</td></tr>`;
+    expenses.slice().sort((a, b) => b.bal - a.bal).forEach((e) => {
+      incomeTbody.innerHTML += `<tr><td>${e.acc}</td><td>${fmt(e.bal)}</td></tr>`;
     });
     incomeTbody.innerHTML += `<tr><td><strong>Total Expenses</strong></td><td><strong>${fmt(totalExpenses)}</strong></td></tr>`;
 
@@ -199,28 +181,26 @@ document.addEventListener("DOMContentLoaded", () => {
     bsTbody.innerHTML = "";
 
     bsTbody.innerHTML += `<tr><td><strong>Assets</strong></td><td></td></tr>`;
-    assets.slice().sort((a, b) => b.amount - a.amount).forEach((a) => {
-      bsTbody.innerHTML += `<tr><td>${a.acc}</td><td>${fmt(a.amount)}</td></tr>`;
+    assets.slice().sort((a, b) => b.bal - a.bal).forEach((a) => {
+      bsTbody.innerHTML += `<tr><td>${a.acc}</td><td>${fmt(a.bal)}</td></tr>`;
     });
     bsTbody.innerHTML += `<tr><td><strong>Total Assets</strong></td><td><strong>${fmt(totalAssets)}</strong></td></tr>`;
 
     bsTbody.innerHTML += `<tr><td style="padding-top:10px;"><strong>Liabilities</strong></td><td></td></tr>`;
-    liabilities.slice().sort((a, b) => b.amount - a.amount).forEach((l) => {
-      bsTbody.innerHTML += `<tr><td>${l.acc}</td><td>${fmt(l.amount)}</td></tr>`;
+    liabilities.slice().sort((a, b) => b.bal - a.bal).forEach((l) => {
+      bsTbody.innerHTML += `<tr><td>${l.acc}</td><td>${fmt(l.bal)}</td></tr>`;
     });
     bsTbody.innerHTML += `<tr><td><strong>Total Liabilities</strong></td><td><strong>${fmt(totalLiabilities)}</strong></td></tr>`;
 
     bsTbody.innerHTML += `<tr><td style="padding-top:10px;"><strong>Equity</strong></td><td></td></tr>`;
-    equityLines.slice().sort((a, b) => b.amount - a.amount).forEach((e) => {
-      bsTbody.innerHTML += `<tr><td>${e.acc}</td><td>${fmt(e.amount)}</td></tr>`;
-    });
-    bsTbody.innerHTML += `<tr><td><strong>Net Income / (Loss)</strong></td><td><strong>${fmt(netIncome)}</strong></td></tr>`;
-    bsTbody.innerHTML += `<tr><td><strong>Total Equity</strong></td><td><strong>${fmt(equityTotal)}</strong></td></tr>`;
+    bsTbody.innerHTML += `<tr><td>Owner Capital</td><td>${fmt(ownerCapital)}</td></tr>`;
+    bsTbody.innerHTML += `<tr><td>Net Income</td><td>${fmt(netIncome)}</td></tr>`;
+    bsTbody.innerHTML += `<tr><td><strong>Total Equity</strong></td><td><strong>${fmt(totalEquity)}</strong></td></tr>`;
 
     const ta = document.getElementById("totalAssetsFooter");
     const tle = document.getElementById("totalLiabilitiesEquityFooter");
     if (ta) ta.innerText = fmt(totalAssets);
-    if (tle) tle.innerText = fmt(totalLiabilitiesEquity);
+    if (tle) tle.innerText = fmt(totalLE);
   }
 
   function showView(view) {
@@ -245,6 +225,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const view = viewParam || hash || "income";
   showView(view);
-
-  const adjusting = journal.filter(isAdjustingEntry);
 });
