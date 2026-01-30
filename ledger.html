@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FinTechsy — Ledger</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .ledger-top{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:14px;
+    }
+    .ledger-top h1{ margin:0; }
+    .ledger-tools{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .ledger-search{
+      width: 260px;
+      max-width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: inherit;
+      outline: none;
+    }
+    .ledger-pill{
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      user-select:none;
+    }
+    .ledger-pill.active{
+      border-color: rgba(34,197,94,.45);
+      background: rgba(34,197,94,.12);
+    }
+    .ledger-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:14px;
+    }
+    @media (max-width: 980px){
+      .ledger-grid{ grid-template-columns: 1fr; }
+    }
+    .ledger-card{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      border-radius: 14px;
+      overflow:hidden;
+    }
+    .ledger-card-head{
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .ledger-card-title{
+      margin:0;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing:.2px;
+    }
+    .ledger-badge{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight: 800;
+      font-size: 12px;
+      white-space:nowrap;
+    }
+    .ledger-badge.dr{ border-color: rgba(59,130,246,.45); background: rgba(59,130,246,.12); }
+    .ledger-badge.cr{ border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12); }
+
+    .ledger-table{
+      width:100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .ledger-table th, .ledger-table td{
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      vertical-align: top;
+    }
+    .ledger-table thead th{
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      opacity: .85;
+      background: rgba(255,255,255,.03);
+    }
+    .ledger-right{ text-align:right; }
+    .ledger-muted{ opacity:.75; }
+    .ledger-foot{
+      padding: 10px 14px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      font-weight: 800;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <h2>FinTechsy</h2>
+  <a href="index.html">Dashboard</a>
+  <a href="journal.html">Journal</a>
+  <a href="ledger.html">Ledger</a>
+  <a href="trial_balance.html">Trial Balance</a>
+  <a href="adjusting_entries.html">Adjusting Entries</a>
+  <a href="adjusted_trial_balance.html">Adjusted Trial Balance</a>
+
+  <div class="sidebar-group">
+    <a href="#" id="stmtToggle">Statements ▾</a>
+    <div class="submenu" id="stmtMenu">
+      <a href="statements.html?view=income">Income Statement</a>
+      <a href="statements.html?view=balance">Balance Sheet</a>
+    </div>
+  </div>
+
+  <a href="about.html">About</a>
+</div>
+
+
+  <div class="content">
+    <div class="ledger-top">
+      <h1>Ledger Accounts</h1>
+
+      <div class="ledger-tools">
+        <input id="ledgerSearch" class="ledger-search" placeholder="Search account..." />
+        <div id="sortName" class="ledger-pill active">A–Z</div>
+        <div id="sortBal" class="ledger-pill">By Balance</div>
+      </div>
+    </div>
+
+    <div id="ledgerContainer" class="ledger-grid"></div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/ledger.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const t = document.getElementById("stmtToggle");
+  const m = document.getElementById("stmtMenu");
+  if(t){
+    t.addEventListener("click", e => {
+      e.preventDefault();
+      m.style.display = m.style.display === "block" ? "none" : "block";
+    });
+  }
+});
+</script>
+
+</body>
+</html>

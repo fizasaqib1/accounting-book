@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FinTechsy — Journal</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .entry-card{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);border-radius:16px;overflow:hidden;margin-bottom:18px}
+  .entry-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04)}
+  .entry-head h3{margin:0;font-size:14px;font-weight:900;letter-spacing:.2px}
+  .entry-head .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .meta input[type="date"]{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:inherit;outline:none;min-width:190px}
+  .entry-body{padding:14px 16px}
+  .jrnl-grid{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
+  .jrnl-grid th,.jrnl-grid td{padding:12px 12px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:middle}
+  .jrnl-grid tr:last-child td{border-bottom:none}
+  .jrnl-grid th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.6px;opacity:.85;background:rgba(255,255,255,.04)}
+  .tag{display:inline-block;width:34px;text-align:center;font-weight:900;border-radius:999px;padding:6px 0;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);font-size:12px}
+  .tag.dr{border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.12)}
+  .tag.cr{border-color:rgba(249,115,22,.45);background:rgba(249,115,22,.12)}
+  .acc-input,.amt-input,.desc-input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:inherit;outline:none}
+  .amt-input{text-align:right;max-width:180px;margin-left:auto}
+  .cr-indent{padding-left:32px}
+  .desc-row{display:grid;grid-template-columns:1fr 160px;gap:10px;margin-top:12px}
+  @media(max-width:900px){.desc-row{grid-template-columns:1fr}}
+  .btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:inherit;font-weight:900;cursor:pointer}
+  .btn.primary{border-color:rgba(59,130,246,.45);background:rgba(59,130,246,.14)}
+  #toast{position:fixed;bottom:20px;right:20px;background:#16a34a;color:#fff;padding:12px 18px;border-radius:10px;display:none;font-weight:800;z-index:9999}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>FinTechsy</h2>
+  <a href="index.html">Dashboard</a>
+  <a href="journal.html" class="active">Journal</a>
+  <a href="ledger.html">Ledger</a>
+  <a href="trial_balance.html">Trial Balance</a>
+  <a href="adjusting_entries.html">Adjusting Entries</a>
+  <a href="adjusted_trial_balance.html">Adjusted Trial Balance</a>
+
+  <div class="sidebar-group">
+    <a href="#" id="stmtToggle">Statements ▾</a>
+    <div class="submenu" id="stmtMenu">
+      <a href="statements.html?view=income">Income Statement</a>
+      <a href="statements.html?view=balance">Balance Sheet</a>
+    </div>
+  </div>
+
+  <a href="about.html">About</a>
+</div>
+
+<div class="content">
+  <h1>Journal Book</h1>
+
+  <form id="journalForm" class="entry-card">
+    <div class="entry-head">
+      <h3>New Journal Entry</h3>
+      <div class="meta">
+        <input type="date" id="date" required>
+        <button class="btn primary" type="submit">Add Entry</button>
+      </div>
+    </div>
+
+    <div class="entry-body">
+      <table class="jrnl-grid">
+        <thead>
+          <tr>
+            <th style="width:70px">Type</th>
+            <th>Account</th>
+            <th style="width:220px">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag dr">Dr</span></td>
+            <td><input class="acc-input" type="text" id="debitAccount" placeholder="Debit Account (e.g., Cash)" required></td>
+            <td><input class="amt-input" type="number" id="debitAmount" placeholder="0" required></td>
+          </tr>
+          <tr>
+            <td><span class="tag cr">Cr</span></td>
+            <td class="cr-indent"><input class="acc-input" type="text" id="creditAccount" placeholder="Credit Account (e.g., Service Revenue)" required></td>
+            <td><input class="amt-input" type="number" id="creditAmount" placeholder="0" required></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="desc-row">
+        <input class="desc-input" type="text" id="description" placeholder="Description (e.g., Web development invoice issued)" required>
+        <button class="btn" type="button" id="matchAmtBtn">Match Amount</button>
+      </div>
+    </div>
+  </form>
+
+  <table class="journal-table" id="journalBody">
+    <thead>
+      <tr>
+        <th style="width:12%">Date</th>
+        <th style="width:36%">Account</th>
+        <th style="width:16%">Debit</th>
+        <th style="width:16%">Credit</th>
+        <th style="width:20%">Description</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<div id="toast">Entry added successfully</div>
+
+<script src="js/journal.js"></script>
+</body>
+</html>

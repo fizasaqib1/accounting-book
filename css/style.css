@@ -1,0 +1,291 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #111827;
+    color: white;
+    display: flex;
+}
+
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #1f2937;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #60a5fa;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.sidebar a.active, .sidebar a:hover {
+    background: #2563eb;
+    border-radius: 6px;
+}
+
+.content {
+    padding: 20px;
+    flex: 1;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    padding: 10px;
+    border: 1px solid #4b5563;
+}
+
+.form input, .form button {
+    padding: 10px;
+    margin: 5px;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.card {
+    background: #1f2937;
+    padding: 20px;
+    margin: 10px;
+    border-left: 4px solid #2563eb;
+}
+
+.cards {
+    display: flex;
+}
+
+.journal-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.journal-filters input,
+.journal-filters button,
+#sortJournal {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #4b5563;
+    background: #1f2937;
+    color: white;
+    font-size: 14px;
+}
+
+.journal-filters button:hover {
+    background: #2563eb;
+    cursor: pointer;
+}
+
+#revExpChart {
+    margin-top: 20px;
+    background: #1f2937;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.table tbody tr:hover {
+    background: #374151;
+}
+
+@media (max-width: 768px) {
+    .cards {
+        flex-direction: column;
+    }
+    .journal-filters {
+        flex-direction: column;
+    }
+}
+
+.journal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #1f2937;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.journal-table th {
+    background: #111827;
+    color: #60a5fa;
+    border: 1px solid #4b5563;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.journal-table td {
+    border: 1px solid #4b5563;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.debit-text {
+    padding-left: 12px;
+    font-weight: 600;
+    color: #a7f3d0; 
+}
+
+.credit-text {
+    padding-left: 40px;
+    font-weight: 600;
+    color: #fca5a5; 
+}
+
+
+.amount {
+    text-align: right;
+    font-weight: 600;
+}
+
+.description {
+    font-style: italic;
+    font-size: 13px;
+    color: #d1d5db;
+    background: #111827;
+}
+
+.journal-table tbody tr:hover {
+    background: #374151;
+}
+
+.journal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background: #1f2937;
+}
+
+.journal-table th {
+    background: #111827;
+    color: #60a5fa;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #374151;
+}
+
+.journal-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #374151;
+    vertical-align: top;
+}
+
+.journal-table .amount {
+    text-align: right;
+    font-weight: 600;
+    color: #e5e7eb;
+}
+
+.debit-text {
+    padding-left: 6px;
+    font-weight: 500;
+    color: #a7f3d0; 
+}
+
+.credit-text {
+    padding-left: 30px; 
+        font-weight: 500;
+    color: #fca5a5;   
+}
+
+.description {
+    vertical-align: middle;
+    font-style: italic;
+    color: #d1d5db;
+}
+
+.journal-table tr:nth-child(2n) td {
+    border-bottom: 2px solid #4b5563;
+}
+
+.journal-table tbody tr:hover {
+    background: #374151;
+}
+
+.content h1 {
+    position: sticky;    
+    top: 0;
+    z-index: 10;
+
+    background: #111827;
+    padding: 15px 0 20px 0;
+    margin: 0 0 25px 0;
+
+    font-size: 28px;
+    font-weight: 700;
+    color: #60a5fa;
+
+    border-bottom: 2px solid #374151;
+}
+
+.journal-entry,
+.journal-table {
+    margin-top: 10px;
+}
+.form {
+    background: #1f2937;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-left: 4px solid #2563eb;
+}
+
+.form input {
+    background: #111827;
+    border: 1px solid #2563eb;
+    color: #e5e7eb;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.form input::placeholder {
+    color: #93c5fd;
+}
+
+.form input:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 1px #60a5fa;
+}
+
+.form button {
+    background: #2563eb;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.form button:hover {
+    background: #1d4ed8;
+}
+.sidebar-group .submenu{
+  display:none;
+  margin-left:12px;
+}
+.sidebar-group .submenu a{
+  font-size:14px;
+  opacity:.9;
+}

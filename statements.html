@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinTechsy — Statements</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .sidebar-group .submenu{
+      display:none;
+      margin-left:12px;
+    }
+    .sidebar-group .submenu a{
+      font-size:14px;
+      opacity:.9;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>FinTechsy</h2>
+  <a href="index.html">Dashboard</a>
+  <a href="journal.html">Journal</a>
+  <a href="ledger.html">Ledger</a>
+  <a href="trial_balance.html">Trial Balance</a>
+  <a href="adjusting_entries.html">Adjusting Entries</a>
+  <a href="adjusted_trial_balance.html">Adjusted Trial Balance</a>
+
+  <div class="sidebar-group">
+    <a href="#" id="stmtToggle" class="active">Statements ▾</a>
+    <div class="submenu" id="stmtMenu">
+      <a href="statements.html?view=income">Income Statement</a>
+      <a href="statements.html?view=balance">Balance Sheet</a>
+    </div>
+  </div>
+
+  <a href="about.html">About</a>
+</div>
+
+<div class="content">
+  <h1 id="stmtTitle">Financial Statements</h1>
+
+  <div class="cards">
+    <div class="card"><h3>Total Revenue</h3><p id="totalRevenueCard">0</p></div>
+    <div class="card"><h3>Total Expenses</h3><p id="totalExpensesCard">0</p></div>
+    <div class="card"><h3>Net Profit</h3><p id="netProfitCard">0</p></div>
+  </div>
+
+  <!-- Income Statement -->
+  <div id="incomeWrap">
+    <h2>Income Statement</h2>
+    <table class="table" id="incomeStatementTable">
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr>
+          <th>Net Profit</th>
+          <th id="netProfitIS">0</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Balance Sheet -->
+  <div id="bsWrap">
+    <h2>Balance Sheet</h2>
+    <table class="table" id="balanceSheetTable">
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr>
+          <th>Total Assets</th>
+          <th id="totalAssetsFooter">0</th>
+        </tr>
+        <tr>
+          <th>Total Liabilities + Equity</th>
+          <th id="totalLiabilitiesEquityFooter">0</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("stmtToggle");
+  const menu = document.getElementById("stmtMenu");
+
+  toggle.addEventListener("click", e => {
+    e.preventDefault();
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const view = params.get("view");
+
+  const income = document.getElementById("incomeWrap");
+  const bs = document.getElementById("bsWrap");
+  const title = document.getElementById("stmtTitle");
+
+  if(view === "balance"){
+    income.style.display = "none";
+    bs.style.display = "block";
+    title.innerText = "Balance Sheet";
+    menu.style.display = "block";
+  } else {
+    income.style.display = "block";
+    bs.style.display = "none";
+    title.innerText = "Income Statement";
+    menu.style.display = "block";
+  }
+});
+</script>
+
+<script src="js/statements.js"></script>
+
+</body>
+</html>

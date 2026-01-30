@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FinTechsy — Trial Balance</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .topbar{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap}
+    .tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .search{width:260px;max-width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:inherit;outline:none}
+    .pill{padding:9px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);font-weight:800;font-size:13px}
+    .pill.ok{border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.12)}
+    .pill.bad{border-color:rgba(244,63,94,.45);background:rgba(244,63,94,.12)}
+    .table-wrap{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);border-radius:14px;overflow:hidden}
+    .table thead th{background:rgba(255,255,255,.04)}
+    .right{text-align:right}
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>FinTechsy</h2>
+  <a href="index.html">Dashboard</a>
+  <a href="journal.html">Journal</a>
+  <a href="ledger.html">Ledger</a>
+  <a href="trial_balance.html">Trial Balance</a>
+  <a href="adjusting_entries.html">Adjusting Entries</a>
+  <a href="adjusted_trial_balance.html">Adjusted Trial Balance</a>
+
+  <div class="sidebar-group">
+    <a href="#" id="stmtToggle">Statements ▾</a>
+    <div class="submenu" id="stmtMenu">
+      <a href="statements.html?view=income">Income Statement</a>
+      <a href="statements.html?view=balance">Balance Sheet</a>
+    </div>
+  </div>
+
+  <a href="about.html">About</a>
+</div>
+
+<div class="content">
+  <div class="topbar">
+    <div>
+      <h1 style="margin:0">Trial Balance</h1>
+      <div style="opacity:.8;font-size:13px;margin-top:4px">Unadjusted Trial Balance (excluding adjusting entries)</div>
+    </div>
+
+     </div>
+
+  <div class="table-wrap">
+    <table class="table" style="margin:0">
+      <thead>
+        <tr>
+          <th>Account</th><th class="right">Debit</th><th class="right">Credit</th>
+        </tr>
+      </thead>
+      <tbody id="trialTable"></tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th><th class="right" id="totalDebit"></th><th class="right" id="totalCredit"></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/trial.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const t = document.getElementById("stmtToggle");
+  const m = document.getElementById("stmtMenu");
+  if(t){
+    t.addEventListener("click", e => {
+      e.preventDefault();
+      m.style.display = m.style.display === "block" ? "none" : "block";
+    });
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FinTechsy — About</title>
+  <link rel="stylesheet" href="css/style.css">
+<style>
+.para{
+  margin: 0 0 10px 0;
+  line-height: 1.7;
+}
+
+.subheading{
+  margin: 14px 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.clean-list{
+  margin: 6px 0 0 18px;
+  padding: 0;
+}
+
+.clean-list li{
+  margin-bottom: 6px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.clean-list li span{
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+:root{
+    --accent: #22c55e;
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+    --panel-bg: rgba(255,255,255,.05);
+    --border-soft: rgba(255,255,255,.12);
+  }
+
+  .hero{
+    padding: 22px;
+    border-radius: 14px;
+    background: linear-gradient(135deg,#0f172a,#020617);
+    border: 1px solid var(--border-soft);
+    margin-bottom: 22px;
+  }
+
+  .hero h1{
+    margin: 0;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: .4px;
+  }
+
+  .hero p{
+    margin: 6px 0 0;
+    font-size: 14.5px;
+    color: var(--text-muted);
+  }
+
+  .section{
+    margin-bottom: 20px;
+  }
+
+  .box{
+    padding: 16px;
+    border-radius: 14px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-soft);
+  }
+
+  .section h2{
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+    padding-left: 10px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .section p,
+  .section li{
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media(max-width:900px){
+    .grid{ grid-template-columns: 1fr; }
+  }
+
+  table{
+    width:100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  table th,
+  table td{
+    border:1px solid var(--border-soft);
+    padding:8px 10px;
+    font-size:14px;
+    color: var(--text-muted);
+  }
+
+  table th{
+    background: rgba(255,255,255,.04);
+    color: var(--text-main);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>FinTechsy</h2>
+  <a href="index.html">Dashboard</a>
+  <a href="journal.html">Journal</a>
+  <a href="ledger.html">Ledger</a>
+  <a href="trial_balance.html">Trial Balance</a>
+  <a href="adjusting_entries.html">Adjusting Entries</a>
+  <a href="adjusted_trial_balance.html">Adjusted Trial Balance</a>
+
+  <div class="sidebar-group">
+    <a href="#" id="stmtToggle">Statements ▾</a>
+    <div class="submenu" id="stmtMenu">
+      <a href="statements.html?view=income">Income Statement</a>
+      <a href="statements.html?view=balance">Balance Sheet</a>
+    </div>
+  </div>
+
+  <a href="about.html">About</a>
+</div>
+
+<div class="content">
+
+  <div class="hero">
+    <h1>FinTechsy By Fiza, Urwa & Aroona</h1>
+    <p>An academic accounting system for an imaginary IT services business</p>
+  </div>
+<div class="section box">
+  <h2>1. Business Background &amp; Stakeholders</h2>
+
+  <p class="para">
+    <strong>FinTechsy</strong> is an <strong>imaginary Information Technology (IT) services business</strong>
+    created for academic purposes by <strong>Fiza, Urwa and Aroona</strong>. The business provides
+    software development, web and mobile application development, IT maintenance, and cloud-based services.
+  </p>
+
+  <p class="para">
+    This project completes the entire accounting cycle of the business for a
+    <strong>single accounting period from January&nbsp;1,&nbsp;2025 to April&nbsp;30,&nbsp;2025</strong>.
+    All transactions recorded relate strictly to this accounting period and follow the accrual basis of accounting.
+  </p>
+
+  <p class="para">
+    Although the business is imaginary, the transactions are designed to reflect
+    realistic operations of a small IT services firm.
+  </p>
+
+  <h3 class="subheading">Stakeholders</h3>
+
+  <ul class="clean-list">
+    <li><span>Owner / Management</span> — performance &amp; profitability analysis</li>
+    <li><span>Employees</span> — job stability and salary assurance</li>
+    <li><span>Creditors &amp; Banks</span> — repayment capacity assessment</li>
+    <li><span>Clients</span> — reliability for long-term IT projects</li>
+    <li><span>Tax Authorities</span> — accurate income reporting</li>
+  </ul>
+</div>
+
+  <div class="section box">
+    <span class="tag">02</span>
+    <h2>Accounting Equation & Types of Accounts</h2>
+
+    <p>
+      FinTechsy follows the fundamental accounting equation:
+    </p>
+
+    <p style="font-weight:700; font-size:16px;">
+      Assets = Liabilities + Equity
+    </p>
+
+    <div class="grid">
+      <div>
+        <strong>Types of Accounts</strong>
+        <ul>
+          <li><strong>Assets:</strong> Cash, Accounts Receivable, Equipment</li>
+          <li><strong>Liabilities:</strong> Accounts Payable, Accrued Expenses, Bank Loan</li>
+          <li><strong>Equity:</strong> Owner Capital</li>
+          <li><strong>Revenue:</strong> Service Revenue, Maintenance Revenue</li>
+          <li><strong>Expenses:</strong> Salaries, Rent, Utilities, Marketing, Depreciation</li>
+        </ul>
+      </div>
+      <div>
+        <strong>Accounting Basis</strong>
+        <ul>
+          <li>Accrual Basis</li>
+          <li>Double-Entry System</li>
+          <li>Matching Principle</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section box">
+    <span class="tag">03</span>
+    <h2>Chart of Accounts</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Account Category</th>
+          <th>Account Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Assets</td><td>Cash, Accounts Receivable, Equipment, Prepaid Rent</td></tr>
+        <tr><td>Liabilities</td><td>Accounts Payable, Accrued Expenses, Bank Loan</td></tr>
+        <tr><td>Equity</td><td>Owner Capital</td></tr>
+        <tr><td>Revenue</td><td>Service Revenue, Maintenance Revenue</td></tr>
+        <tr><td>Expenses</td><td>Salaries Expense, Rent Expense, Utilities Expense, Marketing Expense, Depreciation Expense</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const t = document.getElementById("stmtToggle");
+  const m = document.getElementById("stmtMenu");
+  if(t){
+    t.addEventListener("click", e => {
+      e.preventDefault();
+      m.style.display = m.style.display === "block" ? "none" : "block";
+    });
+  }
+});
+</script>
+
+</body>
+</html>

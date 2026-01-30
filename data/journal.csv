@@ -1,0 +1,55 @@
+entry_id,entry_date,debit_account,credit_account,amount,description
+JE-001,2025-01-01,Cash,Owner Capital,15000,Owner invested capital to start IT services business
+JE-002,2025-01-03,Equipment,Accounts Payable,12000,Laptops and office IT equipment purchased on credit
+JE-003,2025-01-05,Prepaid Rent,Cash,3000,Office rent paid in advance
+JE-004,2025-01-08,Accounts Receivable,Service Revenue,18000,Web development project invoice issued (higher-value project)
+JE-005,2025-01-10,Accounts Receivable,Maintenance Revenue,1500,IT maintenance invoice issued
+JE-006,2025-01-15,Software Expense,Accrued Expenses,600,Cloud software subscription accrued
+JE-007,2025-01-18,Accounts Receivable,Service Revenue,12000,Mobile app development invoice issued (expanded scope)
+JE-008,2025-01-20,Utilities Expense,Accrued Expenses,300,Internet and electricity accrued
+JE-009,2025-01-22,Cash,Accounts Receivable,1500,Maintenance payment received
+JE-010,2025-01-31,Salaries Expense,Accrued Expenses,8000,Developer salaries accrued for January
+JE-011,2025-01-31,Rent Expense,Prepaid Rent,3000,Office rent expense recognized
+JE-012,2025-01-31,Depreciation Expense,Equipment,500,Monthly depreciation of IT equipment
+JE-013,2025-02-01,Accounts Receivable,Maintenance Revenue,1500,February IT maintenance invoice issued
+JE-014,2025-02-05,Accrued Expenses,Cash,600,Software subscription paid
+JE-015,2025-02-07,Accrued Expenses,Cash,300,Utilities paid
+JE-016,2025-02-10,Accrued Expenses,Cash,8000,January salaries paid
+JE-017,2025-02-12,Accounts Receivable,Service Revenue,4000,Software development invoice issued
+JE-018,2025-02-15,Accounts Payable,Cash,6000,Partial payment for IT equipment
+JE-019,2025-02-20,Cash,Accounts Receivable,4000,Client payment received
+JE-020,2025-02-28,Salaries Expense,Accrued Expenses,8200,February salaries accrued
+JE-021,2025-02-28,Rent Expense,Accrued Expenses,3000,Office rent accrued for February
+JE-022,2025-02-28,Depreciation Expense,Equipment,500,Monthly depreciation of IT equipment
+JE-023,2025-03-01,Cash,Accounts Receivable,1500,Maintenance payment received
+JE-024,2025-03-05,Accounts Receivable,Service Revenue,20000,Enterprise software project invoice issued (enterprise contract)
+JE-025,2025-03-10,Cash,Accounts Receivable,3000,Client payment received
+JE-026,2025-03-15,Accounts Payable,Cash,6000,Equipment payable cleared
+JE-027,2025-03-18,Accounts Receivable,Maintenance Revenue,1800,IT support and maintenance invoice issued
+JE-028,2025-03-20,Accrued Expenses,Cash,3000,February rent paid
+JE-029,2025-03-25,Cash,Accounts Receivable,6000,App development invoice collected
+JE-030,2025-03-31,Salaries Expense,Accrued Expenses,8300,March salaries accrued
+JE-031,2025-03-31,Rent Expense,Accrued Expenses,3000,Office rent accrued for March
+JE-032,2025-03-31,Depreciation Expense,Equipment,500,Monthly depreciation of IT equipment
+JE-033,2025-04-01,Accounts Receivable,Maintenance Revenue,1500,April IT maintenance invoice issued
+JE-034,2025-04-05,Accrued Expenses,Cash,8200,February salaries paid (delayed)
+JE-035,2025-04-07,Accrued Expenses,Cash,300,Utilities paid
+JE-036,2025-04-10,Cash,Accounts Receivable,5000,Partial payment received for large project
+JE-037,2025-04-12,Marketing Expense,Accounts Payable,2000,Digital marketing vendor bill
+JE-038,2025-04-15,Accounts Payable,Cash,2000,Marketing bill paid
+JE-039,2025-04-18,Accounts Receivable,Service Revenue,9000,Software enhancement work invoice issued (additional modules)
+JE-040,2025-04-20,Cash,Accounts Receivable,1500,Maintenance payment received
+JE-041,2025-04-25,Accrued Expenses,Cash,3000,March rent paid
+JE-042,2025-04-30,Salaries Expense,Accrued Expenses,8500,April salaries accrued
+JE-043,2025-04-30,Rent Expense,Accrued Expenses,3000,Office rent accrued for April
+JE-044,2025-04-30,Software Expense,Accrued Expenses,650,Software subscription accrued for April
+JE-045,2025-04-30,Utilities Expense,Accrued Expenses,320,Internet and electricity accrued for April
+JE-046,2025-04-30,Depreciation Expense,Equipment,500,Monthly depreciation of IT equipment
+JE-047,2025-04-10,Cash,Bank Loan,10000,Bank loan received to finance IT operations
+JE-048,2025-04-30,Interest Expense,Accrued Expenses,300,Interest accrued on bank loan
+JE-049,2025-05-05,Accrued Expenses,Cash,300,Interest on bank loan paid
+JE-050,2025-05-10,Sales Return,Accounts Receivable,2000,Client cancelled part of IT service project
+JE-051,2025-05-12,Accounts Receivable,Cash,2000,Refund issued to client for cancelled IT service
+JE-052,2025-05-15,Loss by Fire,Equipment,3000,IT equipment damaged due to fire
+JE-053,2025-05-18,Insurance Claim Receivable,Loss by Fire,1800,Insurance claim admitted for fire loss
+JE-054,2025-05-25,Cash,Insurance Claim Receivable,1800,Insurance claim amount received

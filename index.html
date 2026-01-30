@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FinTechsy — Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .topbar{margin-bottom:14px}
+    .subtitle{opacity:.8;font-size:13px;margin-top:4px}
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+      margin:16px 0;
+    }
+    @media(max-width:1100px){
+      .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+
+    .card{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      border-radius:14px;
+      padding:14px 16px;
+    }
+    .card h3{
+      margin:0;
+      font-size:12px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      opacity:.85;
+    }
+    .card p{
+      margin:8px 0 0;
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .pill{
+      display:inline-block;
+      margin-top:6px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      font-weight:800;
+      font-size:13px;
+    }
+    .ok{border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.12)}
+    .bad{border-color:rgba(244,63,94,.45);background:rgba(244,63,94,.12)}
+
+    .panel{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      border-radius:14px;
+      padding:14px 16px;
+      margin-top:16px;
+    }
+    .panel h2{
+      margin:0 0 8px;
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .panel ul{
+      margin:0;
+      padding-left:18px;
+      line-height:1.7;
+      opacity:.9;
+    }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <h2>FinTechsy</h2>
+  <a href="index.html">Dashboard</a>
+  <a href="journal.html">Journal</a>
+  <a href="ledger.html">Ledger</a>
+  <a href="trial_balance.html">Trial Balance</a>
+  <a href="adjusting_entries.html">Adjusting Entries</a>
+  <a href="adjusted_trial_balance.html">Adjusted Trial Balance</a>
+
+  <div class="sidebar-group">
+    <a href="#" id="stmtToggle">Statements ▾</a>
+    <div class="submenu" id="stmtMenu">
+      <a href="statements.html?view=income">Income Statement</a>
+      <a href="statements.html?view=balance">Balance Sheet</a>
+    </div>
+  </div>
+
+  <a href="about.html">About</a>
+</div>
+
+<div class="content">
+  <div class="topbar">
+    <h1 style="margin:0">Dashboard</h1>
+    <div class="subtitle">
+      Accounting Period: January 1, 2025 – April 30, 2025
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Total Journal Entries</h3>
+      <p id="journalCount">0</p>
+    </div>
+
+    <div class="card">
+      <h3>Ledger Accounts</h3>
+      <p id="ledgerCount">0</p>
+    </div>
+
+    
+
+    <div class="card">
+      <h3>Trial Balance Status</h3>
+      <div id="trialStatus" class="pill">—</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>System Summary</h2>
+    <ul>
+      <li>Journal entries are recorded using the accrual basis of accounting.</li>
+      <li>Ledger accounts are automatically posted from the journal.</li>
+      <li>Trial Balance verifies debit and credit equality.</li>
+      <li>Adjusting entries ensure correct period reporting.</li>
+      <li>Financial statements are prepared after adjustments.</li>
+    </ul>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const num = (x) => Number.isFinite(Number(x)) ? Number(x) : 0;
+
+  function getJournal(){
+    const j = (typeof Storage !== "undefined" && typeof Storage.get === "function")
+      ? (Storage.get("journal") || [])
+      : (JSON.parse(localStorage.getItem("journal") || "[]"));
+    return Array.isArray(j) ? j : [];
+  }
+
+  function updateDashboard(){
+    const journal = getJournal();
+
+    const journalCount = document.getElementById("journalCount");
+    const ledgerCount = document.getElementById("ledgerCount");
+    const trialStatus = document.getElementById("trialStatus");
+
+    journalCount.innerText = journal.length;
+
+    const accounts = new Set();
+    let totalDebit = 0;
+    let totalCredit = 0;
+
+    journal.forEach(e => {
+      accounts.add(e.debit_account);
+      accounts.add(e.credit_account);
+
+      const amt = e.amount != null ? num(e.amount) : num(e.debit_amount);
+
+      totalDebit += num(e.debit_amount ?? amt);
+      totalCredit += num(e.credit_amount ?? amt);
+    });
+
+    ledgerCount.innerText = accounts.size;
+
+    if (Math.abs(totalDebit - totalCredit) < 0.001) {
+      trialStatus.innerText = "Balanced";
+      trialStatus.className = "pill ok";
+    } else {
+      trialStatus.innerText = "Not Balanced";
+      trialStatus.className = "pill bad";
+    }
+  }
+
+  updateDashboard();
+  setInterval(updateDashboard, 1000);
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const t = document.getElementById("stmtToggle");
+  const m = document.getElementById("stmtMenu");
+  if(t){
+    t.addEventListener("click", e => {
+      e.preventDefault();
+      m.style.display = m.style.display === "block" ? "none" : "block";
+    });
+  }
+});
+</script>
+
+</body>
+</html>
