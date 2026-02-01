@@ -4,125 +4,211 @@
   <meta charset="UTF-8">
   <title>FinTechsy — About</title>
   <link rel="stylesheet" href="css/style.css">
-<style>
-.para{
-  margin: 0 0 10px 0;
-  line-height: 1.7;
-}
 
-.subheading{
-  margin: 14px 0 6px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-main);
-}
+  <style>
+    :root{
+      --accent:#22c55e;
+      --text-main:#e5e7eb;
+      --text-muted:#9ca3af;
+      --panel-bg:rgba(255,255,255,.05);
+      --border-soft:rgba(255,255,255,.12);
+      --panel-2:rgba(255,255,255,.04);
+      --danger:#f43f5e;
+      --danger-bg:rgba(244,63,94,.12);
+      --danger-border:rgba(244,63,94,.45);
+    }
 
-.clean-list{
-  margin: 6px 0 0 18px;
-  padding: 0;
-}
+    .para{ margin:0 0 10px 0; line-height:1.7; color:var(--text-muted); }
+    .subheading{ margin:14px 0 6px; font-size:15px; font-weight:700; color:var(--text-main); }
+    .clean-list{ margin:6px 0 0 18px; padding:0; }
+    .clean-list li{ margin-bottom:6px; line-height:1.6; color:var(--text-muted); }
+    .clean-list li span{ font-weight:600; color:var(--text-main); }
 
-.clean-list li{
-  margin-bottom: 6px;
-  line-height: 1.6;
-  color: var(--text-muted);
-}
+    .hero{
+      padding:22px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#0f172a,#020617);
+      border:1px solid var(--border-soft);
+      margin-bottom:22px;
+    }
+    .hero h1{ margin:0; font-size:34px; font-weight:800; color:var(--text-main); letter-spacing:.4px; }
+    .hero p{ margin:6px 0 0; font-size:14.5px; color:var(--text-muted); }
 
-.clean-list li span{
-  font-weight: 600;
-  color: var(--text-main);
-}
+    .section{ margin-bottom:20px; }
+    .box{
+      padding:16px;
+      border-radius:14px;
+      background:var(--panel-bg);
+      border:1px solid var(--border-soft);
+    }
+    .section h2{
+      font-size:17px;
+      font-weight:700;
+      color:var(--text-main);
+      margin:0 0 8px;
+      padding-left:10px;
+      border-left:3px solid var(--accent);
+    }
 
-:root{
-    --accent: #22c55e;
-    --text-main: #e5e7eb;
-    --text-muted: #9ca3af;
-    --panel-bg: rgba(255,255,255,.05);
-    --border-soft: rgba(255,255,255,.12);
-  }
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    @media(max-width:900px){ .grid{ grid-template-columns:1fr; } }
 
-  .hero{
-    padding: 22px;
-    border-radius: 14px;
-    background: linear-gradient(135deg,#0f172a,#020617);
-    border: 1px solid var(--border-soft);
-    margin-bottom: 22px;
-  }
+    .coa-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .coa-title h3{
+      margin:0;
+      font-size:18px;
+      font-weight:900;
+      color:var(--text-main);
+    }
+    .coa-title p{
+      margin:6px 0 0;
+      font-size:13px;
+      color:var(--text-muted);
+      line-height:1.5;
+      max-width:720px;
+    }
 
-  .hero h1{
-    margin: 0;
-    font-size: 34px;
-    font-weight: 800;
-    color: var(--text-main);
-    letter-spacing: .4px;
-  }
+    .btn{
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text-main);
+      font-weight:900;
+      cursor:pointer;
+    }
+    .btn.primary{
+      border-color:rgba(34,197,94,.45);
+      background:rgba(34,197,94,.14);
+    }
 
-  .hero p{
-    margin: 6px 0 0;
-    font-size: 14.5px;
-    color: var(--text-muted);
-  }
+    .coa-table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid var(--border-soft);
+      background:rgba(255,255,255,.03);
+    }
+    .coa-table thead th{
+      text-align:left;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.6px;
+      opacity:.9;
+      padding:12px 12px;
+      background:rgba(255,255,255,.04);
+      border-bottom:1px solid rgba(255,255,255,.10);
+      color:var(--text-main);
+    }
+    .coa-table tbody td{
+      padding:12px 12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      color:var(--text-muted);
+      font-size:14px;
+      vertical-align:middle;
+    }
+    .coa-table tbody tr:last-child td{ border-bottom:none; }
 
-  .section{
-    margin-bottom: 20px;
-  }
+    .type-badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.3px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text-main);
+      text-transform:uppercase;
+    }
+    .type-asset{ border-color:rgba(34,197,94,.45); background:rgba(34,197,94,.12); }
+    .type-liability{ border-color:rgba(249,115,22,.45); background:rgba(249,115,22,.12); }
+    .type-equity{ border-color:rgba(59,130,246,.45); background:rgba(59,130,246,.12); }
+    .type-revenue{ border-color:rgba(168,85,247,.45); background:rgba(168,85,247,.12); }
+    .type-expense{ border-color:rgba(244,63,94,.45); background:rgba(244,63,94,.12); }
+    .type-unassigned{ border:1px solid var(--danger-border); background:var(--danger-bg); color:var(--text-main); }
 
-  .box{
-    padding: 16px;
-    border-radius: 14px;
-    background: var(--panel-bg);
-    border: 1px solid var(--border-soft);
-  }
+    .muted{ color:var(--text-muted); font-size:13px; }
+    .hint{ font-size:12.5px; color:var(--text-muted); margin:10px 0 0; line-height:1.6; }
+    .hint strong{ color:var(--text-main); }
 
-  .section h2{
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 8px;
-    padding-left: 10px;
-    border-left: 3px solid var(--accent);
-  }
-
-  .section p,
-  .section li{
-    font-size: 14.5px;
-    line-height: 1.7;
-    color: var(--text-muted);
-  }
-
-  .grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  @media(max-width:900px){
-    .grid{ grid-template-columns: 1fr; }
-  }
-
-  table{
-    width:100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-
-  table th,
-  table td{
-    border:1px solid var(--border-soft);
-    padding:8px 10px;
-    font-size:14px;
-    color: var(--text-muted);
-  }
-
-  table th{
-    background: rgba(255,255,255,.04);
-    color: var(--text-main);
-    font-weight: 700;
-  }
-</style>
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      padding:18px;
+    }
+    .modal{
+      width:min(520px, 100%);
+      border-radius:14px;
+      border:1px solid var(--border-soft);
+      background:#0b1220;
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+      overflow:hidden;
+    }
+    .modal-head{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .modal-head strong{ color:var(--text-main); }
+    .modal-body{ padding:14px 16px; }
+    .field{ display:grid; gap:8px; margin-bottom:12px; }
+    .field label{ font-size:12px; color:var(--text-muted); font-weight:800; letter-spacing:.4px; text-transform:uppercase; }
+    .field input, .field select{
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text-main);
+      outline:none;
+    }
+    .modal-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      padding:0 16px 16px;
+    }
+    .icon-btn{
+      width:36px;
+      height:34px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      cursor:pointer;
+      color:var(--text-main);
+      font-weight:900;
+      user-select:none;
+    }
+  </style>
 </head>
-<body>
 
+<body>
 <div class="sidebar">
   <h2>FinTechsy</h2>
   <a href="index.html">Dashboard</a>
@@ -140,112 +226,395 @@
     </div>
   </div>
 
-  <a href="about.html">About</a>
+  <a href="about.html" class="active">About</a>
 </div>
 
 <div class="content">
-
   <div class="hero">
-    <h1>FinTechsy By Fiza, Urwa & Aroona</h1>
-    <p>An academic accounting system for an imaginary IT services business</p>
+    <h1>FinTechsy By Fiza, Urwa &amp; Aroona</h1>
+    <p>An academic accounting system for a realistic IT-services scenario (imaginary business)</p>
   </div>
-<div class="section box">
-  <h2>1. Business Background &amp; Stakeholders</h2>
-
-  <p class="para">
-    <strong>FinTechsy</strong> is an <strong>imaginary Information Technology (IT) services business</strong>
-    created for academic purposes by <strong>Fiza, Urwa and Aroona</strong>. The business provides
-    software development, web and mobile application development, IT maintenance, and cloud-based services.
-  </p>
-
-  <p class="para">
-    This project completes the entire accounting cycle of the business for a
-    <strong>single accounting period from January&nbsp;1,&nbsp;2025 to April&nbsp;30,&nbsp;2025</strong>.
-    All transactions recorded relate strictly to this accounting period and follow the accrual basis of accounting.
-  </p>
-
-  <p class="para">
-    Although the business is imaginary, the transactions are designed to reflect
-    realistic operations of a small IT services firm.
-  </p>
-
-  <h3 class="subheading">Stakeholders</h3>
-
-  <ul class="clean-list">
-    <li><span>Owner / Management</span> — performance &amp; profitability analysis</li>
-    <li><span>Employees</span> — job stability and salary assurance</li>
-    <li><span>Creditors &amp; Banks</span> — repayment capacity assessment</li>
-    <li><span>Clients</span> — reliability for long-term IT projects</li>
-    <li><span>Tax Authorities</span> — accurate income reporting</li>
-  </ul>
-</div>
 
   <div class="section box">
-    <span class="tag">02</span>
-    <h2>Accounting Equation & Types of Accounts</h2>
-
-    <p>
-      FinTechsy follows the fundamental accounting equation:
+    <h2>1. Business Background &amp; Stakeholders</h2>
+    <p class="para">
+      <strong>FinTechsy</strong> is an <strong>imaginary</strong> IT services firm designed to feel realistic for academic purposes by
+      <strong>Fiza, Urwa &amp; Aroona</strong>. It provides software development, web/mobile apps, IT maintenance, and cloud services.
+    </p>
+    <p class="para">
+      This project completes the full accounting cycle for the accounting period
+      <strong>Jan 1, 2025 – Apr 30, 2025</strong> using accrual accounting and double-entry bookkeeping.
     </p>
 
-    <p style="font-weight:700; font-size:16px;">
+    <h3 class="subheading">Stakeholders</h3>
+    <ul class="clean-list">
+      <li><span>Owner / Management</span> — performance and profitability</li>
+      <li><span>Employees</span> — salary stability and job security</li>
+      <li><span>Creditors &amp; Bank</span> — repayment capacity and risk</li>
+      <li><span>Clients</span> — reliability for long-term projects</li>
+      <li><span>Regulators / Tax</span> — accurate reporting</li>
+    </ul>
+  </div>
+
+  <div class="section box">
+    <h2>2. Accounting Equation &amp; Types of Accounts</h2>
+    <p class="para" style="margin-bottom:6px;">FinTechsy follows the accounting equation:</p>
+    <p style="font-weight:900; font-size:16px; color:var(--text-main); margin:0 0 10px;">
       Assets = Liabilities + Equity
     </p>
 
     <div class="grid">
       <div>
-        <strong>Types of Accounts</strong>
-        <ul>
-          <li><strong>Assets:</strong> Cash, Accounts Receivable, Equipment</li>
-          <li><strong>Liabilities:</strong> Accounts Payable, Accrued Expenses, Bank Loan</li>
-          <li><strong>Equity:</strong> Owner Capital</li>
-          <li><strong>Revenue:</strong> Service Revenue, Maintenance Revenue</li>
-          <li><strong>Expenses:</strong> Salaries, Rent, Utilities, Marketing, Depreciation</li>
+        <div style="font-weight:900; color:var(--text-main); margin-bottom:6px;">Types of Accounts</div>
+        <ul class="clean-list">
+          <li><span>Assets:</span> resources owned (Cash, Accounts Receivable, Equipment)</li>
+          <li><span>Liabilities:</span> obligations (Accounts Payable, Accrued Expenses, Bank Loan)</li>
+          <li><span>Equity:</span> owner’s claim (Owner Capital)</li>
+          <li><span>Revenue:</span> income earned (Service Revenue, Maintenance Revenue)</li>
+          <li><span>Expenses:</span> costs incurred (Salaries, Rent, Utilities, etc.)</li>
         </ul>
       </div>
       <div>
-        <strong>Accounting Basis</strong>
-        <ul>
-          <li>Accrual Basis</li>
-          <li>Double-Entry System</li>
-          <li>Matching Principle</li>
+        <div style="font-weight:900; color:var(--text-main); margin-bottom:6px;">Accounting Basis</div>
+        <ul class="clean-list">
+          <li>Accrual basis</li>
+          <li>Double-entry system</li>
+          <li>Matching principle</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="section box">
-    <span class="tag">03</span>
-    <h2>Chart of Accounts</h2>
+  <div class="section box" id="coaSection">
+    <div class="coa-head">
+      <div class="coa-title">
+        <h3>Chart of Accounts</h3>
+        <p>
+         New account names will show as
+          <strong>Unassigned</strong> (red) until you set the correct type using “Add Account”.
+        </p>
+       </div>
+      <button class="btn primary" id="btnAddAcc">+ Add Account</button>
+    </div>
 
-    <table>
+    <table class="coa-table">
       <thead>
         <tr>
-          <th>Account Category</th>
-          <th>Account Name</th>
+          <th>Name</th>
+          <th style="width:160px;">Type</th>
+          <th style="width:180px;">Normal Balance</th>
         </tr>
       </thead>
-      <tbody>
-        <tr><td>Assets</td><td>Cash, Accounts Receivable, Equipment, Prepaid Rent</td></tr>
-        <tr><td>Liabilities</td><td>Accounts Payable, Accrued Expenses, Bank Loan</td></tr>
-        <tr><td>Equity</td><td>Owner Capital</td></tr>
-        <tr><td>Revenue</td><td>Service Revenue, Maintenance Revenue</td></tr>
-        <tr><td>Expenses</td><td>Salaries Expense, Rent Expense, Utilities Expense, Marketing Expense, Depreciation Expense</td></tr>
+      <tbody id="coaRows">
+        <tr><td colspan="3" class="muted">Loading…</td></tr>
       </tbody>
     </table>
   </div>
-
 </div>
+
+<div class="modal-backdrop" id="coaModal">
+  <div class="modal">
+    <div class="modal-head">
+      <strong>Add Account</strong>
+      <button class="icon-btn" id="closeModal" title="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Account Name</label>
+        <input id="newAccName" type="text" placeholder="e.g., Prepaid Insurance" />
+      </div>
+      <div class="field">
+        <label>Type</label>
+        <select id="newAccType">
+          <option value="Asset">Asset</option>
+          <option value="Liability">Liability</option>
+          <option value="Equity">Equity</option>
+          <option value="Revenue">Revenue</option>
+          <option value="Expense">Expense</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="cancelAdd">Cancel</button>
+      <button class="btn primary" id="saveAdd">Save</button>
+    </div>
+  </div>
+</div>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const t = document.getElementById("stmtToggle");
-  const m = document.getElementById("stmtMenu");
-  if(t){
-    t.addEventListener("click", e => {
+  const stmtToggle = document.getElementById("stmtToggle");
+  const stmtMenu = document.getElementById("stmtMenu");
+  if (stmtToggle && stmtMenu) {
+    stmtToggle.addEventListener("click", (e) => {
       e.preventDefault();
-      m.style.display = m.style.display === "block" ? "none" : "block";
+      stmtMenu.style.display = (stmtMenu.style.display === "block") ? "none" : "block";
     });
   }
+
+  const cleanSpaces = (s) =>
+    String(s || "")
+      .replace(/\r/g, "")
+      .replace(/\u00A0/g, " ")
+      .trim()
+      .replace(/\s+/g, " ");
+
+  const titleCase = (s) =>
+    cleanSpaces(s)
+      .toLowerCase()
+      .split(" ")
+      .map(w => w ? w[0].toUpperCase() + w.slice(1) : w)
+      .join(" ");
+
+  const canonKey = (s) => cleanSpaces(s).toLowerCase();
+
+  const CANON = {
+    "cash": "Cash",
+    "accounts receivable": "Accounts Receivable",
+    "equipment": "Equipment",
+    "prepaid rent": "Prepaid Rent",
+    "insurance claim receivable": "Insurance Claim Receivable",
+    "accounts payable": "Accounts Payable",
+    "accrued expenses": "Accrued Expenses",
+    "bank loan": "Bank Loan",
+    "owner capital": "Owner Capital",
+    "service revenue": "Service Revenue",
+    "maintenance revenue": "Maintenance Revenue",
+    "sales return": "Sales Return",
+    "salaries expense": "Salaries Expense",
+    "rent expense": "Rent Expense",
+    "utilities expense": "Utilities Expense",
+    "marketing expense": "Marketing Expense",
+    "depreciation expense": "Depreciation Expense",
+    "software expense": "Software Expense",
+    "interest expense": "Interest Expense",
+    "loss by fire": "Loss by Fire"
+  };
+
+  const canonName = (s) => {
+    const k = canonKey(s);
+    return CANON[k] || titleCase(s);
+  };
+
+  const ACCOUNT_MASTER = {
+    "Cash": "Asset",
+    "Accounts Receivable": "Asset",
+    "Equipment": "Asset",
+    "Prepaid Rent": "Asset",
+    "Insurance Claim Receivable": "Asset",
+
+    "Accounts Payable": "Liability",
+    "Accrued Expenses": "Liability",
+    "Bank Loan": "Liability",
+
+    "Owner Capital": "Equity",
+
+    "Service Revenue": "Revenue",
+    "Maintenance Revenue": "Revenue",
+    "Sales Return": "Revenue",
+
+    "Salaries Expense": "Expense",
+    "Rent Expense": "Expense",
+    "Utilities Expense": "Expense",
+    "Marketing Expense": "Expense",
+    "Depreciation Expense": "Expense",
+    "Software Expense": "Expense",
+    "Interest Expense": "Expense",
+    "Loss by Fire": "Expense"
+  };
+
+  const TYPE_ORDER = { Asset: 1, Liability: 2, Equity: 3, Revenue: 4, Expense: 5, Unassigned: 9 };
+
+  function getCustomTypes() {
+    const x = JSON.parse(localStorage.getItem("coa_custom") || "[]");
+    return Array.isArray(x) ? x : [];
+  }
+
+  function setCustomTypes(arr) {
+    localStorage.setItem("coa_custom", JSON.stringify(Array.isArray(arr) ? arr : []));
+  }
+
+  async function loadCSVEntriesFull() {
+    const res = await fetch("data/journal.csv");
+    const text = await res.text();
+    const rows = text.trim().split("\n").slice(1);
+
+    return rows
+      .map((line) => {
+        const parts = line.split(",");
+        const date = parts[1];
+        const debit_account = parts[2];
+        const credit_account = parts[3];
+        const amount = parts[4];
+        const description = parts.slice(5).join(",");
+        const amt = Number(amount);
+
+        return {
+          date: cleanSpaces(date),
+          debit_account: canonName(debit_account),
+          debit_amount: isFinite(amt) ? amt : 0,
+          credit_account: canonName(credit_account),
+          credit_amount: isFinite(amt) ? amt : 0,
+          description: cleanSpaces(description)
+        };
+      })
+      .filter((e) => e.date && e.debit_account && e.credit_account && isFinite(e.debit_amount) && e.debit_amount > 0);
+  }
+
+  function getJournalLocal() {
+    const j = JSON.parse(localStorage.getItem("journal") || "[]");
+    return Array.isArray(j) ? j : [];
+  }
+
+  function setJournalLocal(j) {
+    localStorage.setItem("journal", JSON.stringify(Array.isArray(j) ? j : []));
+  }
+
+  async function ensureJournalIsFull() {
+    const local = getJournalLocal();
+
+    const looksFull = local.some((e) =>
+      e && (
+        ("debit_account" in e && "credit_account" in e) ||
+        ("debit" in e && "credit" in e)
+      )
+    );
+
+    if (looksFull && local.length) return local;
+
+    const csv = await loadCSVEntriesFull();
+    const merged = Array.isArray(local) ? local.slice() : [];
+
+    csv.forEach((e) => {
+      const exists = merged.some((x) =>
+        cleanSpaces(x.date || x.entry_date || "") === e.date &&
+        canonName(x.debit_account || x.debit || "") === e.debit_account &&
+        canonName(x.credit_account || x.credit || "") === e.credit_account &&
+        Number(x.debit_amount ?? x.amount ?? 0) === e.debit_amount &&
+        Number(x.credit_amount ?? x.amount ?? 0) === e.credit_amount &&
+        cleanSpaces(x.description || "") === e.description
+      );
+      if (!exists) merged.push(e);
+    });
+
+    setJournalLocal(merged);
+    return merged;
+  }
+
+  function typeClass(type) {
+    const t = String(type || "").toLowerCase();
+    if (t === "asset") return "type-badge type-asset";
+    if (t === "liability") return "type-badge type-liability";
+    if (t === "equity") return "type-badge type-equity";
+    if (t === "revenue") return "type-badge type-revenue";
+    if (t === "expense") return "type-badge type-expense";
+    return "type-badge type-unassigned";
+  }
+
+  function normalBalance(type) {
+    return (type === "Asset" || type === "Expense") ? "DEBIT" : "CREDIT";
+  }
+
+  function buildCOA(journal) {
+    const names = new Set();
+
+    journal.forEach((e) => {
+      const d = e.debit_account || e.debit || "";
+      const c = e.credit_account || e.credit || "";
+      if (d) names.add(canonName(d));
+      if (c) names.add(canonName(c));
+    });
+
+    const custom = getCustomTypes();
+    custom.forEach((x) => { if (x?.name) names.add(canonName(x.name)); });
+
+    const out = Array.from(names).map((name) => {
+      const c = custom.find((x) => canonKey(x.name) === canonKey(name));
+      const fixedName = canonName(name);
+      const type = c?.type || ACCOUNT_MASTER[fixedName] || "Unassigned";
+      return { name: fixedName, type };
+    });
+
+    out.sort((a, b) => {
+      const oa = TYPE_ORDER[a.type] ?? 9;
+      const ob = TYPE_ORDER[b.type] ?? 9;
+      if (oa !== ob) return oa - ob;
+      return a.name.localeCompare(b.name);
+    });
+
+    return out;
+  }
+
+  function render(accounts) {
+    const tbody = document.getElementById("coaRows");
+    if (!tbody) return;
+
+    tbody.innerHTML = "";
+    if (!accounts.length) {
+      tbody.innerHTML = `<tr><td colspan="3" class="muted">No accounts found.</td></tr>`;
+      return;
+    }
+
+    accounts.forEach((a) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td style="font-weight:800;color:var(--text-main)">${a.name}</td>
+        <td><span class="${typeClass(a.type)}">${String(a.type).toUpperCase()}</span></td>
+        <td style="font-weight:900;color:var(--text-main)">${a.type === "Unassigned" ? "—" : normalBalance(a.type)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  const modal = document.getElementById("coaModal");
+  const btnAdd = document.getElementById("btnAddAcc");
+  const closeModal = document.getElementById("closeModal");
+  const cancelAdd = document.getElementById("cancelAdd");
+  const saveAdd = document.getElementById("saveAdd");
+
+  function openModal() {
+    if (!modal) return;
+    modal.style.display = "flex";
+    document.getElementById("newAccName").value = "";
+    document.getElementById("newAccType").value = "Asset";
+    setTimeout(() => document.getElementById("newAccName").focus(), 50);
+  }
+
+  function hideModal() {
+    if (!modal) return;
+    modal.style.display = "none";
+  }
+
+  if (btnAdd) btnAdd.addEventListener("click", openModal);
+  if (closeModal) closeModal.addEventListener("click", hideModal);
+  if (cancelAdd) cancelAdd.addEventListener("click", hideModal);
+  if (modal) modal.addEventListener("click", (e) => { if (e.target === modal) hideModal(); });
+
+  async function refresh() {
+    const journal = await ensureJournalIsFull();
+    const coa = buildCOA(journal);
+    render(coa);
+  }
+
+  if (saveAdd) {
+    saveAdd.addEventListener("click", async () => {
+      const nameRaw = document.getElementById("newAccName").value || "";
+      const name = canonName(nameRaw);
+      const type = document.getElementById("newAccType").value || "Asset";
+      if (!name) return;
+
+      const arr = getCustomTypes();
+      const i = arr.findIndex((x) => canonKey(x.name) === canonKey(name));
+      if (i >= 0) arr[i] = { name, type };
+      else arr.push({ name, type });
+
+      setCustomTypes(arr);
+      hideModal();
+      await refresh();
+    });
+  }
+
+  refresh();
 });
 </script>
 
